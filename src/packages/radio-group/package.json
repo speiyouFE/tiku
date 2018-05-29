@@ -1,0 +1,15 @@
+{
+  "name": "seal-radio-group",
+  "version": "0.0.1",
+  "description": "A radio-group component for Vue.js.",
+  "keywords": [
+    "sealui",
+    "vue",
+    "component"
+  ],
+  "main": "./lib/index.js",
+  "repository": "https://github.com/SealUI/radio-group",
+  "author": "sealui",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -1,0 +1,233 @@
+@require './config'
+
+*
+  box-sizing: border-box
+  padding 0;
+  margin 0
+::-webkit-scrollbar
+    width: 6px;
+    height: 7px;
+    background: #f8f8f8;
+::-webkit-scrollbar-thumb
+  background-color:#666;
+  border-radius:4px
+html,body,#__CHN_APP
+  width 100%
+  height 100%
+body
+  padding 0;
+  margin 0;
+  background #fff
+  font-family -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", sans-serif
+  font-size 14px
+  color: #333
+  -webkit-font-smoothing antialiased
+  -moz-osx-font-smoothing grayscale
+h1,h2,h3,h4,h5,h6
+  padding 0;
+  margin 0;
+  font-weight 400
+ul,li
+  padding 0;
+  margin 0
+  list-style-type none
+.nprogress-busy
+  pointer-events none;
+
+#nprogress .bar
+  background: $success
+  top:0px;
+  height:2px;
+
+#nprogress .peg
+  box-shadow:0 0 0 transparent;
+
+#nprogress .spinner
+  position: fixed;
+  top:50%;
+  left:50%;
+  right:auto;
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+
+#nprogress .spinner-icon
+  border-top-color $success
+  border-left-color $success
+  width: 40px;
+  height:40px
+  border-width:2px
+  -webkit-animation: nprogress-spinner 800ms linear infinite;
+  animation: nprogress-spinner 800ms linear infinite;
+
+.main-content
+  width $contentWidth
+  margin 0 auto
+.page-content
+  padding 10px 0 0 0
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  background #fff;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #e8eaed;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 5px 12px;
+  line-height: 1.42857143;
+  vertical-align: middle;
+  border-top: 1px solid #e8eaed;
+  word-break: break-all;
+}
+.table > thead > tr > th {
+  vertical-align: bottom;
+  background: rgba(232, 234, 237, 0.5);
+  border-bottom: 1px solid #e8eaed;
+  padding: 8px 12px;
+}
+
+.table > tbody + tbody {
+  border-top: 1px solid #e8eaed;
+}
+.table .table {
+  background-color: #fafafa;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f2f5fd;
+}
+.table-hover > tbody > tr:hover {
+  background-color: #f9f9f9;
+}
+.sealui-panel{
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #e9e9e9;
+    border-radius: 2px;
+    color: #333;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(140, 144, 155, 0.15);
+    -moz-box-shadow: 0 2px 5px 0 rgba(140, 144, 155, 0.15);
+    box-shadow: 0 2px 5px 0 rgba(140, 144, 155, 0.15);
+    margin-bottom : 10px;
+  }
+  .sealui-panel.is-default{
+    border-color:#20a0ff;
+  }
+  .sealui-panel.is-default .sealui-panel-heading{
+    background-color:#20a0ff;
+    color:#fff
+  }
+  .sealui-panel-heading{
+    padding: 10px 15px;
+    border-bottom: 0px solid #e9e9e9;
+    border-top-right-radius: 2px;
+    border-top-left-radius: 2px;
+    background: #fff;
+    color: #333;
+    border-color: #e8eaed;
+    background: #fff;
+    position: relative;
+  }
+  .sealui-panel-title{
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    font-size: 20px;
+    letter-spacing: .6px;
+    line-height: 24px;
+  }
+  .sealui-panel-body{
+    padding: 0px;
+  }
+.panel > .table:first-child,
+.panel > .table-responsive:first-child > .table:first-child {
+  border-top-right-radius: 1px;
+  border-top-left-radius: 1px;
+}
+.panel > .table:first-child > thead:first-child > tr:first-child,
+.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child,
+.panel > .table:first-child > tbody:first-child > tr:first-child,
+.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child {
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
+}
+.panel > .table:first-child > thead:first-child > tr:first-child td:first-child,
+.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:first-child,
+.panel > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:first-child,
+.panel > .table:first-child > thead:first-child > tr:first-child th:first-child,
+.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:first-child,
+.panel > .table:first-child > tbody:first-child > tr:first-child th:first-child,
+.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:first-child {
+  border-top-left-radius: 1px;
+}
+.panel > .table:first-child > thead:first-child > tr:first-child td:last-child,
+.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child td:last-child,
+.panel > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child td:last-child,
+.panel > .table:first-child > thead:first-child > tr:first-child th:last-child,
+.panel > .table-responsive:first-child > .table:first-child > thead:first-child > tr:first-child th:last-child,
+.panel > .table:first-child > tbody:first-child > tr:first-child th:last-child,
+.panel > .table-responsive:first-child > .table:first-child > tbody:first-child > tr:first-child th:last-child {
+  border-top-right-radius: 1px;
+}
+.panel > .table:last-child,
+.panel > .table-responsive:last-child > .table:last-child {
+  border-bottom-right-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
+.panel > .table:last-child > tbody:last-child > tr:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child,
+.panel > .table:last-child > tfoot:last-child > tr:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child {
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+.panel > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:first-child,
+.panel > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:first-child,
+.panel > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:first-child,
+.panel > .table:last-child > tfoot:last-child > tr:last-child th:first-child,
+.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:first-child {
+  border-bottom-left-radius: 1px;
+}
+.panel > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child td:last-child,
+.panel > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child td:last-child,
+.panel > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tbody:last-child > tr:last-child th:last-child,
+.panel > .table:last-child > tfoot:last-child > tr:last-child th:last-child,
+.panel > .table-responsive:last-child > .table:last-child > tfoot:last-child > tr:last-child th:last-child {
+  border-bottom-right-radius: 1px;
+}
+.panel > .panel-body + .table,
+.panel > .panel-body + .table-responsive,
+.panel > .table + .panel-body,
+.panel > .table-responsive + .panel-body {
+  border-top: 1px solid #e8eaed;
+}
+.panel > .table > tbody:first-child > tr:first-child th,
+.panel > .table > tbody:first-child > tr:first-child td {
+  border-top: 0;
+}
+
+.no-data-tip
+  text-align:center;
+  padding:3em 0
+  span
+    display:block
+    padding 1em 0 0 0
+    font-size 1.5em
+    color #888
