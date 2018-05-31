@@ -36,7 +36,7 @@
     text-align center
   img
     display block
-    margin 0px auto 20px auto
+    margin 0px auto 30px auto
   .sealui-button
     font-size 1em
     margin 0 20px
