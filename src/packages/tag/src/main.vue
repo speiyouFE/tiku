@@ -3,9 +3,9 @@
     <span
       class="sealui-tag"
       :class="[theme ? 'is-' + theme : '',type ? 'is-' + type : '']"
-      :style="{backgroundColor: color}" @click="handleClick">
+      :style="{backgroundColor: color}">
       <span :class="dotClasses" v-if="showDot"></span>
-      <span class="sealui-tag__text" v-if="closable"><slot></slot></span>
+      <span class="sealui-tag__text" v-if="closable" @click="handleClick"><slot></slot></span>
       <span v-else><slot></slot></span>
       <i class="sealui-tag__close sealui-icon-close"
         v-if="closable"

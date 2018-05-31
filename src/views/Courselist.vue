@@ -21,8 +21,20 @@
             <tr v-for="i in 30">
               <td align="left">第{{i}}课</td>
               <td align="left" width="60%">
-                <!-- <seal-tag theme="success" :closable="true" @close="handleCloseTag(tags,tag)">北京诊断类大班数学</seal-tag> -->
-                <seal-button size="small" type="info" @click="createAddPaperDialog(i)">添加讲义</seal-button>
+
+                <div v-for="(items,key) in classPaperLists">
+                  <seal-tag
+                  theme="success"
+                  :closable="true"
+                  :id="'tag_'+key"
+                  @click="gotoPaperUrl(items.paperUrl)"
+                  @close="handleCloseTag(key,items.paperId,items.cnum)"
+                  v-if="key == i"
+                  v-for="items in items.classPaperRelateList"
+                  >{{items.paperName}}</seal-tag>
+                  <seal-button size="small" type="info" @click="createAddPaperDialog(i)" v-else>添加讲义</seal-button>
+                </div>
+
               </td>
               <td align="center">听着情歌流泪</td>
               <td align="center">2018-05-23 18:55:52</td>
@@ -37,6 +49,7 @@
     <seal-dialog
       width="800px"
       custom-class="createAddPaperDialog"
+      @on-open="getPaperFoldersList"
       :show-close="paperId ? false : true"
       :close-on-click-modal="false"
       :visible.sync="createAddPaperDialogVisible"
@@ -128,10 +141,11 @@
         subjectLists                : JSON.parse(localStorage.getItem('subjectLists')) || [],
         createAddPaperDialogVisible : false,
 
-        folderslists : [],
-        paperLists : [],
-        paperId : null,
-        levelIds : this.$route.query.levelIds
+        folderslists                : [],
+        paperLists                  : [],
+        classPaperLists : [],
+        paperId                     : null,
+        levelIds                    : this.$route.query.levelIds
       }
     },
     created(){
@@ -139,10 +153,104 @@
     },
     mounted(){
       this.$nextTick().then(()=>{
-        this.getPaperFoldersList()
+        this.getPapers(this.levelIds)
       })
     },
     methods:{
+
+      /**
+       * 获取 paper 列表
+       * @return {[type]} [description]
+       */
+      getPapers(levelIds){
+        this.$request({
+          url:'/class/papers',
+          data:this.getBaseData({
+            levelIds :levelIds
+          })
+        }).then((res) => {
+          this.loading = false
+          if(res.status == 0){
+            this.classPaperLists = res.result
+          }else{
+            this.classPaperLists = []
+          }
+          console.log(this.classPaperLists)
+        },(error) => {
+          this.loading = false
+          this.$message({
+            type: 'error',
+            message: '服务器超时'
+          });
+          console.log(error.message)
+        })
+      },
+
+      // 取消绑定讲义
+      handleCloseTag(tag,paperId,cnum){
+        let _self = this;
+        this.$confirm('此操作将解绑现有讲义, 是否继续?', '系统提示', {
+          confirmButtonText: '解绑吧',
+          cancelButtonText: '等等，考虑一下',
+          type: 'warning',
+          closeOnClickModal:false
+        }).then(() => {
+          this.$request({
+            url:'/class/unbindPaper',
+            method:'DELETE',
+            data:{
+              paperId : paperId,
+              cnum : cnum,
+              levelIds : this.levelIds
+            }
+          }).then((res) => {
+            if(res.status == 0 ){
+              _self.$message({
+                duration:3000,
+                type: 'success',
+                message: '解绑成功!'
+              });
+              let el = document.getElementById('tag_'+tag);
+              el.parentNode.removeChild(el);
+            }else{
+
+            }
+          },(error) => {
+
+          })
+        }).catch(() => {
+          // this.$message({
+          //   type: 'info',
+          //   message: '已取消删除'
+          // });
+        });
+
+        // this.delAction(function(){
+        //   this.$request({
+        //     url:'/class/unbindPaper',
+        //     method:'DELETE',
+        //     data:{
+        //       id : paperId
+        //     }
+        //   }).then((res) => {
+        //     if(res.status == 0 ){
+        //       _self.$message({
+        //         duration:3000,
+        //         type: 'success',
+        //         message: '解绑成功!'
+        //       });
+        //       let el = document.getElementById('tag_'+tag);
+        //       el.parentNode.removeChild(el);
+        //     }else{
+
+        //     }
+        //   },(error) => {
+
+        //   })
+
+        // })
+      },
+
       delAction(callback){
         this.$confirm('此操作将解绑现有讲义, 是否继续?', '系统提示', {
           confirmButtonText: '解绑吧',
@@ -151,10 +259,6 @@
           closeOnClickModal:false
         }).then(() => {
           callback()
-          // this.$message({
-          //   type: 'success',
-          //   message: '删除成功!'
-          // });
         }).catch(() => {
           // this.$message({
           //   type: 'info',
@@ -162,42 +266,6 @@
           // });
         });
       },
-      // /**
-      //  * 获取 paper 列表
-      //  * @return {[type]} [description]
-      //  */
-      // getPapers(levelIds){
-      //   this.$request({
-      //     url:'/class/papers',
-      //     data:this.getBaseData({
-      //       levelIds :levelIds
-      //     })
-      //   }).then((res) => {
-      //     console.log(res)
-      //     this.loading = false
-      //   },(error) => {
-      //     this.loading = false
-      //     this.$message({
-      //       type: 'error',
-      //       message: '服务器超时'
-      //     });
-      //     console.log(error.message)
-      //   })
-      // },
-
-      // 取消绑定讲义
-      handleCloseTag(tags,tag){
-        let _self = this;
-        this.delAction(function(){
-          _self.$message({
-            duration:3000,
-            type: 'success',
-            message: '解绑成功!'
-          });
-        })
-        //tags.splice(tags.indexOf(tag), 1);
-      },
-
       /**
        * 创建绑定讲义弹层
        * @return {[type]} [description]
@@ -343,6 +411,10 @@
             message: '服务器返回错误'
           });
         })
+      },
+
+      gotoPaperUrl(paperUrl){
+        window.location.href=paperUrl
       }
     }
   }

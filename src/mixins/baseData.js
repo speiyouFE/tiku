@@ -22,11 +22,13 @@ export default {
     getBaseData(obj){
       let sources = obj || {}
       let _data = {
-        schoolCode      : sessionStorage.getItem('schoolCode') || '',
-        year            : sessionStorage.getItem('year') || '',
-        termId          : sessionStorage.getItem('termId') || '',
-        gradeId         : sessionStorage.getItem('gradeId') || '',
-        subjectId       : 'ff80808127d77caa0127d7e13be500c6',
+        schoolCode : sessionStorage.getItem('schoolCode') || '',
+        year       : sessionStorage.getItem('year') || '',
+        termId     : sessionStorage.getItem('termId') || '',
+        gradeId    : sessionStorage.getItem('gradeId') || '',
+        userId     : sessionStorage.getItem('userId') || '',
+        userName   : sessionStorage.getItem('userName') || '',
+        subjectId  : 'ff80808127d77caa0127d7e13be500c6',
       }
       return Object.assign(sources,_data)
     },

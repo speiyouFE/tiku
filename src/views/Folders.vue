@@ -57,8 +57,8 @@
     data(){
       return {
         createFolderDialogVisible : false,
-        folderName : '',
-        folderslists : []
+        folderName                : '',
+        folderslists              : []
       }
     },
     filters:{
