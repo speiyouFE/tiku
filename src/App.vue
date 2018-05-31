@@ -16,12 +16,5 @@
 body
   background url('assets/img/choice_bg.jpg') no-repeat
   background-size 100% 100%
-  background-attachment: fixed
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+  background-attachment fixed
 </style>
