@@ -22,7 +22,7 @@
             <ul>
               <li v-for="item in courselists">
                 <seal-checkbox :name= "item.levelId" :label="item" :key="item.levelId">{{ item.levelName }}</seal-checkbox>
-                <span class="table-head--title">{{paperCount ? paperCount : 0}}/30</span>
+                <span class="table-head--title">{{item.paperCount ? item.paperCount : 0}}/30</span>
                 <!-- <router-link :to="{path:'list',query:{id:1,d:schoolCode}}" class="binding-num"><i class="sealui-icon-editor"></i> 去绑定</router-link> -->
                 <a href="javasvript:;" class="table-head--title" @click="bindingItem(item.levelId)"><i class="sealui-icon-editor"></i> 去绑定</a>
               </li>

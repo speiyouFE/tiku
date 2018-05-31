@@ -12,9 +12,9 @@
           <thead>
             <tr>
               <th align="left">课次</th>
-              <th align="left" width="70%">讲义名称</th>
-              <th align="center">操作人</th>
-              <th align="center">操作时间</th>
+              <th align="left" width="85%">讲义名称</th>
+              <th align="center" width="8%">操作人</th>
+              <!-- <th align="center">操作时间</th> -->
             </tr>
           </thead>
           <tbody>
@@ -37,7 +37,7 @@
                 <seal-button size="small" type="info" @click="createAddPaperDialog(i)">添加讲义</seal-button>
               </td>
               <td align="center">{{userName}}</td>
-              <td align="center">2018-05-23 18:55:52</td>
+              <!-- <td align="center">2018-05-23 18:55:52</td> -->
             </tr>
           </tbody>
         </table>
