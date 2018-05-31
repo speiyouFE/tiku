@@ -3,10 +3,12 @@
     <p>亲，你能告诉我，你想干嘛吗？</p>
     <div class="blankslate-content">
       <div class="blankslate">
-        <router-link to="/paperfolder">创建 Paper</router-link>
+        <img src="@/assets/img/defaultPortrait.png" />
+        <router-link to="/paperfolder" class="sealui-button is-success"><i class="sealui-icon-caret-left"></i>左拐 创建Paper</router-link>
       </div>
       <div class="blankslate">
-        <router-link to="/papercourse">绑定 Paper</router-link>
+        <img src="@/assets/img/defaultPortrait.png" />
+        <router-link to="/papercourse" class="sealui-button is-success">右拐 绑定Paper<i class="sealui-icon-caret-right"></i></router-link>
       </div>
     </div>
   </div>
@@ -15,7 +17,7 @@
   .page-content
     text-align center
     background #f0f2f5
-    width 500px
+    width 600px
     margin 0 auto
     font-size 30px
     border-radius 3px
@@ -30,4 +32,10 @@
     padding 50px 0
   .blankslate
     flex 1
+    text-align center
+  img
+    display block
+    margin 0px auto 20px auto
+  .sealui-button
+    font-size 1em
 </style>

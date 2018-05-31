@@ -225,8 +225,9 @@
           }
         }).then((res) => {
           if(res.status == 0){
+            window.open(res.result,"_blank");
             //this.editPaperUrl = res.result
-            window.location.href=res.result
+            //window.location.href=res.result
           }else{
 
           }

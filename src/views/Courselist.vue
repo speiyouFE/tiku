@@ -410,7 +410,8 @@
       },
 
       gotoPaperUrl(paperUrl){
-        window.location.href=paperUrl
+        window.open(paperUrl,"_blank");
+        //window.location.href=paperUrl
       }
     }
   }
