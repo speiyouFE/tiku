@@ -14,8 +14,7 @@
       <div class="sealui-panel-body" v-if="courselists.length">
         <div class="table-head">
           <seal-checkbox :indeterminate="isIndeterminate"  v-model="checkAll" @change="handleCheckedAllChange">班次名称</seal-checkbox>
-          <span class="table-head--title">讲义绑定数量</span>
-          <span class="table-head--title">课件绑定数量</span>
+          <span class="table-head--title">试卷绑定数量</span>
           <span class="table-head--title">操作</span>
         </div>
         <div class="table-body">
@@ -24,7 +23,6 @@
               <li v-for="item in courselists">
                 <seal-checkbox :name= "item.levelId" :label="item" :key="item.levelId">{{ item.levelName }}</seal-checkbox>
                 <span class="table-head--title">1/30</span>
-                <span class="table-head--title">0/30</span>
                 <!-- <router-link :to="{path:'list',query:{id:1,d:schoolCode}}" class="binding-num"><i class="sealui-icon-editor"></i> 去绑定</router-link> -->
                 <a href="javasvript:;" class="table-head--title" @click="bindingItem(item.levelId)"><i class="sealui-icon-editor"></i> 去绑定</a>
               </li>
@@ -34,7 +32,7 @@
       </div>
       <div class="sealui-panel-body" v-else>
         <div class="table-body">
-          <p class="no-data-tip"><img src="@/assets/img/404.svg"><span>别看了，这里啥数据也没有...</span></p>
+          <p class="no-data-tip"><img src="@/assets/img/404.svg"><span>{{noDataMessage}}</span></p>
         </div>
       </div>
     </div>
@@ -43,7 +41,7 @@
     <seal-pagination layout="prev, pager, next" :total="total_num" v-if="courselists.length && total_num > pageSize" :page-size="pageSize" @current-change="handleCurrentChange" @size-change="handleCurrentChange"></seal-pagination>
 
     <!-- loading -->
-    <div v-loading="loading" img="@/assets/img/logo.png" text="让数据飞一会..." background="rgba(0,0,0,.15)" color="success"></div>
+    <div v-loading="loading" img="https://jiaoyanfz.aibeike.com/haibian/images/40@2x.png" text="让数据飞一会..." background="rgba(0,0,0,.15)" color="success"></div>
 
   </div>
 </template>
@@ -52,16 +50,12 @@
 
 import baseData from '@/mixins/baseData';
 export default {
-  name: 'Home',
-  mixins : [
-    baseData
-  ],
+  name: 'Course',
+  mixins : [ baseData ],
   data (){
     return {
+      courselists     : [],         // 列表数据
       levelIds        : '',
-
-      total_num       : 0,          // 数据总数
-      pageNo          : 1,          // 请求页码
       pageSize        : 10,         // 每页展示条数
       checkAll        : false,      // 是否全选
       isIndeterminate : true,       //
@@ -69,11 +63,9 @@ export default {
     }
   },
   mounted(){
-    let _self = this
-    this.$nextTick().then(function () {
-      //_self.getAllTypes();
-      if(_self.schoolCode && _self.year && _self.termId && _self.gradeId && _self.subjectId){
-        _self.getDoubleCourseLevel(1)
+    this.$nextTick().then(()=>{
+      if(this.schoolCode && this.year && this.termId && this.gradeId && this.subjectId){
+        this.getDoubleCourseLevel()
       }
     })
 
@@ -94,15 +86,10 @@ export default {
       this.loading = true
       this.$request({
         url:'chn/course/findDoubleCourseLevel',
-        data:{
-          schoolCode : this.schoolCode || '010',
-          termId     : this.termId || 2,
-          year       : this.year || 2018,
-          gradeId    : this.gradeId || 1,
-          subjectId  : this.subjectId || 'ff80808127d77caa0127d7e13be500c6',
+        data : this.getBaseData({
           pageSize   : this.pageSize,
           pageNo     : page || 1
-        }
+        })
       }).then((res) => {
         this.loading = false;
         if(res.status == 0 && res.result.totalCount > 0){
@@ -161,7 +148,7 @@ export default {
 
     // 监听组件的重置筛选指令
     resetFiltrate(){
-      this.courselists = []
+      this.courselists = [];
     }
   },
 

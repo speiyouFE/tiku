@@ -20,7 +20,7 @@ const request = ({ url, method = 'GET', data = {}, header={},dataType = 'json',w
       data            :   data,
       responseType    :   dataType,
       timeout         :   timeout,
-      //headers         :   header,
+      headers         :   header,
       withCredentials :   withCredentials
     }
     let opts = Object.assign(defaultConfig, config || {});

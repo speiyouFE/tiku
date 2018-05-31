@@ -14,6 +14,7 @@ import Pagination from './pagination/index.js';
 import Dialog from './dialog/index.js';
 import Modal from './modal/index.js';
 import Message from './message/index.js';
+import Input from './input/index.js';
 
 const components = [
   CheckboxGroup,
@@ -28,7 +29,8 @@ const components = [
   Button,
   ButtonGroup,
   Pagination,
-  Dialog
+  Dialog,
+  Input
   //Panels
 ]
 const install = function(Vue, opts = {}) {
@@ -69,6 +71,7 @@ export default {
   Pagination,
   Dialog,
   Modal,
-  Message
+  Message,
+  Input
   //Panels
 };

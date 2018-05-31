@@ -9,8 +9,9 @@ const _BANNER = [
 ].join('\n');
 
 module.exports = {
-  baseUrl:'//chn-paper.nmtree.com',
+  baseUrl:'//chn-paper.sealui.com',
   assetsDir : resDir,
+  outputDir : 'wwwroot',
   compiler: false,
   css : {
 
@@ -83,6 +84,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/class': '/class'
+        }
+      },
+      '/paperFolders': {
+        target: 'http://47.95.4.35:8081/',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/paperFolders': '/paperFolders'
         }
       },
     }

@@ -3,19 +3,38 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 export default new VueRouter({
-  mode:"history",
+  mode: process.env.NODE_ENV === 'production' ? "hash" : "history",
   base : '/',
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: resolve => require(['@/views/Home'], resolve)
+      name: 'Index',
+      component: resolve => require(['@/views/Index'], resolve)
+    },
+    // 查询班次
+    {
+      path: '/papercourse',
+      name: 'PaperCourse',
+      component: resolve => require(['@/views/Course'], resolve)
     },
     {
-      path: '/list',
-      name: 'PaperList',
-      component: resolve => require(['@/views/PaperList'], resolve)
+      path: '/courselist',
+      name: 'Courselist',
+      component: resolve => require(['@/views/Courselist'], resolve)
     },
+
+    // 文件夹
+    {
+      path: '/paperfolder',
+      name: 'PaperFolders',
+      component: resolve => require(['@/views/Folders'], resolve)
+    },
+    {
+      path: '/paperlist',
+      name: 'PaperList',
+      component: resolve => require(['@/views/Papers'], resolve)
+    },
+
     {
       path: '/demo',
       name: 'Demo',
