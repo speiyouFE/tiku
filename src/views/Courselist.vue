@@ -22,21 +22,21 @@
               <td align="left">第{{i}}课</td>
               <td align="left" width="60%">
 
-                <div v-for="(items,key) in classPaperLists">
+                <div v-for="(items,keys) in classPaperLists" :key="items.id" style="display: inline-block;" v-if="keys == i">
                   <seal-tag
                   theme="success"
                   :closable="true"
-                  :id="'tag_'+key"
-                  @click="gotoPaperUrl(items.paperUrl)"
-                  @close="handleCloseTag(key,items.paperId,items.cnum)"
-                  v-if="key == i"
-                  v-for="items in items.classPaperRelateList"
-                  >{{items.paperName}}</seal-tag>
-                  <seal-button size="small" type="info" @click="createAddPaperDialog(i)" v-else>添加讲义</seal-button>
+                  :id="'tag_'+i+'_'+key"
+                  @click="gotoPaperUrl(item.paperUrl)"
+                  @close="handleCloseTag(`${i}_${key}`,item.paperId,item.cnum)"
+                  v-for="(item,key) in items.classPaperRelateList"
+                  :key="item.id"
+                  >{{item.paperName}}</seal-tag>
                 </div>
 
+                <seal-button size="small" type="info" @click="createAddPaperDialog(i)">添加讲义</seal-button>
               </td>
-              <td align="center">听着情歌流泪</td>
+              <td align="center">{{userName}}</td>
               <td align="center">2018-05-23 18:55:52</td>
             </tr>
           </tbody>
@@ -145,7 +145,8 @@
         paperLists                  : [],
         classPaperLists : [],
         paperId                     : null,
-        levelIds                    : this.$route.query.levelIds
+        levelIds                    : this.$route.query.levelIds,
+        userName : sessionStorage.getItem('userName')
       }
     },
     created(){
@@ -175,7 +176,6 @@
           }else{
             this.classPaperLists = []
           }
-          console.log(this.classPaperLists)
         },(error) => {
           this.loading = false
           this.$message({
@@ -199,19 +199,16 @@
             url:'/class/unbindPaper',
             method:'DELETE',
             data:{
-              paperId : paperId,
-              cnum : cnum,
+              paperId  : paperId,
+              cnum     : cnum,
               levelIds : this.levelIds
             }
           }).then((res) => {
             if(res.status == 0 ){
-              _self.$message({
-                duration:3000,
-                type: 'success',
-                message: '解绑成功!'
-              });
-              let el = document.getElementById('tag_'+tag);
-              el.parentNode.removeChild(el);
+              _self.$message.success('解绑成功');
+              // let el = document.getElementById('tag_'+tag);
+              // el.parentNode.removeChild(el);
+              this.getPapers(this.levelIds)
             }else{
 
             }
@@ -329,10 +326,7 @@
           }
         },(error) => {
           this.loading = false
-          this.$message({
-            type: 'error',
-            message: '服务器返回错误'
-          });
+          this.$message.error('服务器返回错误')
         })
       },
 
@@ -360,10 +354,7 @@
           }
         },(error) => {
           this.loading = false
-          this.$message({
-            type: 'error',
-            message: '服务器返回错误'
-          });
+          this.$message.error('服务器返回错误')
         })
       },
 
@@ -380,6 +371,7 @@
       },
 
       bindPaper(){
+        let _self = this
         this.loading = true
         this.$request({
           url:`class/bindPaper`,
@@ -397,19 +389,23 @@
         }).then((res) => {
           this.loading = false;
           if(res.status == 0){
+
             this.$message({
+              duration:1000,
               type: 'success',
-              message: '添加讲义成功'
+              message: '添加讲义成功',
+              onClose:function(){
+                _self.getPapers(_self.levelIds)
+              }
             });
             this.createAddPaperDialogVisible = false
-            sessionStorage.clear()
+            this.paperLists = [];
+          }else if(res.status == 3){
+            this.$message.warning('不能重复绑定')
           }
         },(error) => {
           this.loading = false
-          this.$message({
-            type: 'error',
-            message: '服务器返回错误'
-          });
+          this.$message.error('服务器返回错误')
         })
       },
 

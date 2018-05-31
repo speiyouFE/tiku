@@ -25,7 +25,7 @@ const request = ({ url, method = 'GET', data = {}, header={},dataType = 'json',w
     }
     let opts = Object.assign(defaultConfig, config || {});
 
-    if(method.toUpperCase() == 'GET'){
+    if(method.toUpperCase() == 'GET' || method.toUpperCase() == 'DELETE'){
       opts.params = data ? data : '';
     }
 
