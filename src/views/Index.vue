@@ -4,11 +4,11 @@
     <div class="blankslate-content">
       <div class="blankslate">
         <img src="@/assets/img/defaultPortrait.png" />
-        <router-link to="/paperfolder" class="sealui-button is-success"><i class="sealui-icon-caret-left"></i>左拐 创建Paper</router-link>
+        <router-link to="/paperfolder" class="sealui-button is-success"><i class="sealui-icon-double-left" style="margin-right: 10px"></i> 左拐 创建Paper</router-link>
       </div>
       <div class="blankslate">
         <img src="@/assets/img/defaultPortrait.png" />
-        <router-link to="/papercourse" class="sealui-button is-success">右拐 绑定Paper<i class="sealui-icon-caret-right"></i></router-link>
+        <router-link to="/papercourse" class="sealui-button is-success">右拐 绑定Paper <i class="sealui-icon-double-right"style="margin-left: 10px"></i></router-link>
       </div>
     </div>
   </div>
@@ -16,17 +16,18 @@
 <style lang="stylus" scoped>
   .page-content
     text-align center
-    background #f0f2f5
-    width 600px
+    background #fff
     margin 0 auto
-    font-size 30px
-    border-radius 3px
-    border 1px solid #e9e9e9
-    padding 30px
-    top 30%
+    font-size 20px
+    border-radius 6px
+    border 1px solid #e2f7a8
+    padding 50px 30px 30px 30px
+    top 50%
     left 50%
-    transform: translateX(-50%);
+    transform:translate(-50%,-50%);
+    transform-origin:50% 50%;
     position: absolute;
+    box-shadow: 0px 0px 50px #309eac
   .blankslate-content
     display flex
     padding 50px 0
@@ -38,4 +39,5 @@
     margin 0px auto 20px auto
   .sealui-button
     font-size 1em
+    margin 0 20px
 </style>
