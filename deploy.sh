@@ -5,7 +5,7 @@ rm -rf ./wwwroot
 echo "\033[35m 开始提交代码 \033[0m"
 git add -A
 git commit -m "🍑 🌴 🍋 ==> $(date +%F) $(date +%H:%M:%S)"
-git origin master
+git push origin master
 echo ""
 echo "\033[32m ✔ 代码提交完成... \033[0m"
 echo ""
