@@ -24,7 +24,8 @@
 
                 <div v-for="(items,keys) in classPaperLists" :key="items.id" style="display: inline-block;" v-if="keys == i">
                   <seal-tag
-                  theme="success"
+                  type="border"
+                  :theme="key | randomTheme"
                   :closable="true"
                   :id="'tag_'+i+'_'+key"
                   @click="gotoPaperUrl(item.paperUrl)"
@@ -156,6 +157,22 @@
       this.$nextTick().then(()=>{
         this.getPapers(this.levelIds)
       })
+    },
+    filters:{
+      randomTheme (id){
+        let d = Math.random(),
+            _theme = '';
+        if(d>0 && d<=0.3){
+          _theme = 'danger'
+        }else if(d>0.3 && d<=0.5){
+          _theme = 'success'
+        }else if(d>0.5 && d<=0.7){
+          _theme = 'warning'
+        }else{
+          _theme = 'primary'
+        }
+        return _theme
+      }
     },
     methods:{
 
