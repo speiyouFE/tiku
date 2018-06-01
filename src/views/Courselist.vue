@@ -2,7 +2,7 @@
   <div class="page-content">
     <div class="sealui-panel is-default">
       <div class="sealui-panel-heading">
-        <h3 class="sealui-panel-title">大语文</h3>
+        <h3 class="sealui-panel-title">大语文 </h3>
         <div class="panels-right">
 
         </div>
