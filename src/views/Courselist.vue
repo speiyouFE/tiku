@@ -18,7 +18,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="i in 30">
+            <tr v-for="i in 100">
               <td align="left">第{{i}}课</td>
               <td align="left" width="60%">
 
